@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Base project</string>
+    <string name="header">Timetable for HSE FE</string>
+    <string name="logo">HSE logo</string>
+    <string name="button1">РАСПИСАНИЕ ДЛЯ СТУДЕНТОВ</string>
+    <string name="button2">РАСПИСАНИЕ ДЛЯ ПРЕПОДАВАТЕЛЯ</string>
+</resources>
