@@ -3,6 +3,7 @@ package org.hse.android;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -19,20 +20,21 @@ public class MainActivity extends AppCompatActivity {
 
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) { showToast(button1); }
+            public void onClick(View v) { showStudent(); }
         });
 
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) { showToast(button2); }
+            public void onClick(View v) { showTeacher(); }
         });
     }
-    private void showToast(Button b){
-        Context context = getApplicationContext();
-        String text = b.getText().toString();
-        int duration = Toast.LENGTH_SHORT;
 
-        Toast toast = Toast.makeText(context, text, duration);
-        toast.show();
+    private void showStudent(){
+        Intent intent = new Intent(this, StudentActivity.class);
+        startActivity(intent);
+    }
+    private void showTeacher(){
+        Intent intent = new Intent(this, TeacherActivity.class);
+        startActivity(intent);
     }
 }
