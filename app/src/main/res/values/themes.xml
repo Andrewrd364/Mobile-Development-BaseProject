@@ -9,6 +9,8 @@
         <!-- Secondary colors -->
         <item name="colorSecondary">@color/colorSecondary</item>
         <item name="colorSecondaryVariant">@color/colorSecondaryVariant</item>
+        <item name="android:textColor">@color/colorSecondary</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="Theme.BaseProject" parent="Base.Theme.BaseProject" />

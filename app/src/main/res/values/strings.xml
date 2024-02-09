@@ -4,4 +4,11 @@
     <string name="logo">HSE logo</string>
     <string name="button1">РАСПИСАНИЕ ДЛЯ СТУДЕНТОВ</string>
     <string name="button2">РАСПИСАНИЕ ДЛЯ ПРЕПОДАВАТЕЛЯ</string>
+    <string name="teacherActivity.textView1">Выберите преподавателя:</string>
+    <string name="teacherActivity.textTime">Сейчас: </string>
+    <string name="teacherActivity.textStatus">Идет пара / нет пар</string>
+    <string name="teacherActivity.textSubject">Дисциплина</string>
+    <string name="teacherActivity.textCabinet">Кабинет</string>
+    <string name="teacherActivity.textCorp">Корпус</string>
+    <string name="teacherActivity.textTeacher">Преподаватель</string>
 </resources>
