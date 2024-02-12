@@ -11,4 +11,6 @@
     <string name="teacherActivity.textCabinet">Кабинет</string>
     <string name="teacherActivity.textCorp">Корпус</string>
     <string name="teacherActivity.textTeacher">Преподаватель</string>
+    <string name="teacherActivity.button1">РАСПИСАНИЕ НА ДЕНЬ</string>
+    <string name="teacherActivity.button2">РАСПИСАНИЕ НА НЕДЕЛЮ</string>
 </resources>

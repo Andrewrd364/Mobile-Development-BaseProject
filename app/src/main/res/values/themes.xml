@@ -9,6 +9,10 @@
         <!-- Secondary colors -->
         <item name="colorSecondary">@color/colorSecondary</item>
         <item name="colorSecondaryVariant">@color/colorSecondaryVariant</item>
+        <item name="android:textViewStyle">@style/TextViewStyle</item>
+    </style>
+
+    <style name="TextViewStyle" parent="android:Widget.TextView">
         <item name="android:textColor">@color/colorSecondary</item>
         <item name="android:textStyle">bold</item>
     </style>
