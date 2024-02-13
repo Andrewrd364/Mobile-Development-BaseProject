@@ -16,10 +16,12 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
+import java.util.TimeZone;
 
 public class TeacherActivity extends AppCompatActivity {
 
-    private Date currentTime;
+    private Date currentTime = new Date();
+    private final TimeZone timeZone = TimeZone.getTimeZone("GMT+5");
     private TextView time;
     private TextView status;
     private TextView subject;
@@ -70,9 +72,16 @@ public class TeacherActivity extends AppCompatActivity {
         groups.add(new StudentActivity.Group(2, "Преподаватель 2"));
     }
     private void initTime(){
-        currentTime = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
-        time.setText(simpleDateFormat.format(currentTime));
+        simpleDateFormat.setTimeZone(timeZone);
+
+        SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE", new Locale("ru", "RU"));
+        dayFormat.setTimeZone(timeZone);
+
+        String formattedTime = simpleDateFormat.format(currentTime);
+        String formattedDay = dayFormat.format(currentTime);
+
+        time.setText(String.join(" ", formattedTime, formattedDay.substring(0,1).toUpperCase() + formattedDay.substring(1)));
     }
 
     private void initData(){

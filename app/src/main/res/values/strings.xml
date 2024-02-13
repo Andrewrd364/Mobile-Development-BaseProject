@@ -13,4 +13,5 @@
     <string name="teacherActivity.textTeacher">Преподаватель</string>
     <string name="teacherActivity.button1">РАСПИСАНИЕ НА ДЕНЬ</string>
     <string name="teacherActivity.button2">РАСПИСАНИЕ НА НЕДЕЛЮ</string>
+    <string name="studentActivity.textView1">Выберите группу:</string>
 </resources>
