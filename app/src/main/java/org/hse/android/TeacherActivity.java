@@ -28,6 +28,7 @@ public class TeacherActivity extends AppCompatActivity {
     private TextView cabinet;
     private TextView corp;
     private TextView teacher;
+    private final String Tag = "TeacherActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +47,7 @@ public class TeacherActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Object item = adapter.getItem(position);
-                Log.d("TeacherActivity", "selected item: " + item);
+                Log.d(Tag, "selected item: " + item);
             }
 
             @Override
@@ -85,10 +86,10 @@ public class TeacherActivity extends AppCompatActivity {
     }
 
     private void initData(){
-        status.setText("Нет пар");
-        subject.setText("Дисциплина");
-        cabinet.setText("Кабинет");
-        corp.setText("Корпус");
-        teacher.setText("Преподаватель");
+        status.setText(R.string.teacherActivity_textStatus);
+        subject.setText(R.string.teacherActivity_textSubject);
+        cabinet.setText(R.string.teacherActivity_textCabinet);
+        corp.setText(R.string.teacherActivity_textCorp);
+        teacher.setText(R.string.teacherActivity_textTeacher);
     }
 }

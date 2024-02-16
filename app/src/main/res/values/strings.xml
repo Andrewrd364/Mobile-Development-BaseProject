@@ -11,7 +11,7 @@
     <string name="teacherActivity.textCabinet">Кабинет</string>
     <string name="teacherActivity.textCorp">Корпус</string>
     <string name="teacherActivity.textTeacher">Преподаватель</string>
-    <string name="teacherActivity.button1">РАСПИСАНИЕ НА ДЕНЬ</string>
-    <string name="teacherActivity.button2">РАСПИСАНИЕ НА НЕДЕЛЮ</string>
+    <string name="teacherActivity.button1">РАСПИСАНИЕ НА\n ДЕНЬ</string>
+    <string name="teacherActivity.button2">РАСПИСАНИЕ НА\n НЕДЕЛЮ</string>
     <string name="studentActivity.textView1">Выберите группу:</string>
 </resources>

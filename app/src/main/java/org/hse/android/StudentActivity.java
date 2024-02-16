@@ -29,6 +29,7 @@ public class StudentActivity extends AppCompatActivity {
     private TextView teacher;
 
     private final TimeZone timeZone = TimeZone.getTimeZone("GMT+5");
+    private final String Tag = "StudentActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +48,7 @@ public class StudentActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Object item = adapter.getItem(position);
-                Log.d("TeacherActivity", "selected item: " + item);
+                Log.d(Tag, "selected item: " + item);
             }
 
             @Override
@@ -96,11 +97,11 @@ public class StudentActivity extends AppCompatActivity {
         time.setText(String.join(" ", formattedTime, formattedDay.substring(0,1).toUpperCase() + formattedDay.substring(1)));
     }
     private void initData(){
-        status.setText("Нет пар");
-        subject.setText("Дисциплина");
-        cabinet.setText("Кабинет");
-        corp.setText("Корпус");
-        teacher.setText("Преподаватель");
+        status.setText(R.string.teacherActivity_textStatus);
+        subject.setText(R.string.teacherActivity_textSubject);
+        cabinet.setText(R.string.teacherActivity_textCabinet);
+        corp.setText(R.string.teacherActivity_textCorp);
+        teacher.setText(R.string.teacherActivity_textTeacher);
     }
 
     static class Group {

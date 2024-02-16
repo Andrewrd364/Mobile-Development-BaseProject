@@ -15,7 +15,8 @@
         android:layout_margin="15dp"
         android:text="@string/teacherActivity.textView1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        style="@style/TextViewStyle"/>
 
     <Spinner
         android:id="@+id/spinner"
@@ -33,7 +34,8 @@
         android:text="@string/teacherActivity.textTime"
         app:layout_constraintTop_toBottomOf="@id/spinner"
         app:layout_constraintStart_toStartOf="@id/spinner"
-        android:layout_marginTop="15dp"/>
+        android:layout_marginTop="15dp"
+        style="@style/TextViewStyle"/>
 
     <TextView
         android:id="@+id/textStatus"
@@ -101,5 +103,5 @@
         android:layout_marginTop="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginEnd="15dp"
-        android:layout_marginStart="15dp"/>
+        android:layout_marginStart="15dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
