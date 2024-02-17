@@ -4,6 +4,7 @@
     <string name="logo">HSE logo</string>
     <string name="button1">РАСПИСАНИЕ ДЛЯ СТУДЕНТОВ</string>
     <string name="button2">РАСПИСАНИЕ ДЛЯ ПРЕПОДАВАТЕЛЯ</string>
+    <string name="settings">НАСТРОЙКИ</string>
     <string name="teacherActivity.textView1">Выберите преподавателя:</string>
     <string name="teacherActivity.textTime">Сейчас: </string>
     <string name="teacherActivity.textStatus">Идет пара / нет пар</string>
@@ -14,4 +15,9 @@
     <string name="teacherActivity.button1">РАСПИСАНИЕ НА\n ДЕНЬ</string>
     <string name="teacherActivity.button2">РАСПИСАНИЕ НА\n НЕДЕЛЮ</string>
     <string name="studentActivity.textView1">Выберите группу:</string>
+    <string name="settingsActivity.save">СОХРАНИТЬ</string>
+    <string name="settingsActivity.textView1">Укажите фото:</string>
+    <string name="settingsActivity.takePhoto">СДЕЛАТЬ ФОТО</string>
+    <string name="settingsActivity.setName">Укажите ваше имя</string>
+    <string name="settingsActivity.lightLevel">Текущая освещенность:</string>
 </resources>

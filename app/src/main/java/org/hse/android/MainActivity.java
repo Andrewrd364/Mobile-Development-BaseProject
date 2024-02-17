@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Button button1 = findViewById(R.id.button1);
         Button button2 = findViewById(R.id.button2);
+        Button button3 = findViewById(R.id.settings);
 
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -27,6 +28,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) { showTeacher(); }
         });
+        button3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { showSettings(); }
+        });
     }
 
     private void showStudent(){
@@ -35,6 +40,10 @@ public class MainActivity extends AppCompatActivity {
     }
     private void showTeacher(){
         Intent intent = new Intent(this, TeacherActivity.class);
+        startActivity(intent);
+    }
+    private void showSettings(){
+        Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
     }
 }
