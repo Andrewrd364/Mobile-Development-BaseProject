@@ -1,18 +1,38 @@
 package org.hse.android;
 
+import android.Manifest;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +41,12 @@ public class SettingsActivity extends AppCompatActivity implements SensorEventLi
     private SensorManager sensorManager;
     private Sensor light;
     private TextView sensorLight;
+    private static final int REQUEST_IMAGE_CAPTURE = 101;
+    private static final int CAMERA_PERMISSION_CODE = 102;
+    private ImageView imageView;
+    private static final String IMAGE_FILE_NAME = "photo.jpg";
+    private File imageFile;
+    private Bitmap imageBitmap;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +56,36 @@ public class SettingsActivity extends AppCompatActivity implements SensorEventLi
         light = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
         sensorLight = findViewById(R.id.textView3);
 
+        printSensorList();
+
+        takePictureEvent();
+    }
+    private void takePictureEvent(){
+        Button btnOpenCamera = findViewById(R.id.takePhoto);
+        Button btnSave = findViewById(R.id.save);
+        imageView = findViewById(R.id.imageView);
+
+        loadImageFromStorage();
+        btnOpenCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (checkCameraPermission()) {
+                    dispatchTakePictureIntent();
+                } else {
+                    requestCameraPermission();
+                }
+            }
+        });
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (imageBitmap != null) {
+                    saveImageToFile();
+                }
+            }
+        });
+    }
+    private void printSensorList(){
         List<Sensor> sensorList = sensorManager.getSensorList(Sensor.TYPE_ALL);
 
         ArrayList<String> sensorNames = new ArrayList<>();
@@ -41,6 +97,59 @@ public class SettingsActivity extends AppCompatActivity implements SensorEventLi
 
         ListView listView = findViewById(R.id.sensor_listview);
         listView.setAdapter(adapter);
+    }
+    private boolean checkCameraPermission() {
+        return ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED;
+    }
+
+    private void requestCameraPermission() {
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION_CODE);
+    }
+    private void dispatchTakePictureIntent() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+        }
+    }
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            if (data != null && data.getExtras() != null) {
+                Bundle extras = data.getExtras();
+                imageBitmap = (Bitmap) extras.get("data");
+                imageView.setImageBitmap(imageBitmap);
+            }
+        }
+    }
+    private void saveImageToFile() {
+        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File imageFile = new File(storageDir, IMAGE_FILE_NAME);
+        try {
+            FileOutputStream fos = new FileOutputStream(imageFile);
+            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+            fos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private void loadImageFromStorage() {
+        try {
+            File file = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), IMAGE_FILE_NAME);
+            if (file.exists()) {
+                Bitmap bitmap = BitmapFactory.decodeStream(new FileInputStream(file));
+                imageView.setImageBitmap(bitmap);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == CAMERA_PERMISSION_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                dispatchTakePictureIntent();
+            }
+        }
     }
 
     @Override
