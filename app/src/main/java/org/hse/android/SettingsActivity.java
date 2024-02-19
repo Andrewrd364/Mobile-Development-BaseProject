@@ -9,7 +9,12 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SettingsActivity extends AppCompatActivity implements SensorEventListener {
 
@@ -24,6 +29,18 @@ public class SettingsActivity extends AppCompatActivity implements SensorEventLi
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         light = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
         sensorLight = findViewById(R.id.textView3);
+
+        List<Sensor> sensorList = sensorManager.getSensorList(Sensor.TYPE_ALL);
+
+        ArrayList<String> sensorNames = new ArrayList<>();
+        for (Sensor currentSensor : sensorList) {
+            sensorNames.add(currentSensor.getName());
+        }
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, sensorNames);
+
+        ListView listView = findViewById(R.id.sensor_listview);
+        listView.setAdapter(adapter);
     }
 
     @Override

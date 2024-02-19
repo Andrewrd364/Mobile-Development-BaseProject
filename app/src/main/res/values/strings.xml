@@ -20,4 +20,5 @@
     <string name="settingsActivity.takePhoto">СДЕЛАТЬ ФОТО</string>
     <string name="settingsActivity.setName">Укажите ваше имя</string>
     <string name="settingsActivity.lightLevel">Текущая освещенность:</string>
+    <string name="settingsActivity.sensors">Список всех датчиков:</string>
 </resources>
