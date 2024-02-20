@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -20,6 +21,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.Environment;
+import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -27,6 +29,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -47,6 +51,9 @@ public class SettingsActivity extends AppCompatActivity implements SensorEventLi
     private static final String IMAGE_FILE_NAME = "photo.jpg";
     private File imageFile;
     private Bitmap imageBitmap;
+    private static final String PREF_TEXT_KEY = "saved_text";
+    private TextInputEditText textInputEditText;
+    private SharedPreferences sharedPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +66,10 @@ public class SettingsActivity extends AppCompatActivity implements SensorEventLi
         printSensorList();
 
         takePictureEvent();
+
+        textInputEditText = findViewById(R.id.name);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        loadTextFromSharedPreferences();
     }
     private void takePictureEvent(){
         Button btnOpenCamera = findViewById(R.id.takePhoto);
@@ -79,11 +90,23 @@ public class SettingsActivity extends AppCompatActivity implements SensorEventLi
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                saveTextToSharedPreferences();
                 if (imageBitmap != null) {
                     saveImageToFile();
                 }
             }
         });
+    }
+    private void saveTextToSharedPreferences() {
+        String text = textInputEditText.getText().toString();
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(PREF_TEXT_KEY, text);
+        editor.apply();
+    }
+
+    private void loadTextFromSharedPreferences() {
+        String savedText = sharedPreferences.getString(PREF_TEXT_KEY, "");
+        textInputEditText.setText(savedText);
     }
     private void printSensorList(){
         List<Sensor> sensorList = sensorManager.getSensorList(Sensor.TYPE_ALL);
