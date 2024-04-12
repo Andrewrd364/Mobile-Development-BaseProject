@@ -23,6 +23,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -152,7 +153,7 @@ public class SettingsActivity extends AppCompatActivity implements SensorEventLi
             imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
             fos.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.e("tag", "", e);
         }
     }
     private void loadImageFromStorage() {
@@ -163,7 +164,7 @@ public class SettingsActivity extends AppCompatActivity implements SensorEventLi
                 imageView.setImageBitmap(bitmap);
             }
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            Log.e("tag", "", e);
         }
     }
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -178,7 +179,7 @@ public class SettingsActivity extends AppCompatActivity implements SensorEventLi
     @Override
     public void onSensorChanged(SensorEvent event) {
         float lux = event.values[0];
-        sensorLight.setText(String.format("%.2f lux", lux));
+        sensorLight.setText(String.format("%.2f " + this.getString(R.string.settingsActivity_lux), lux));
     }
 
     @Override
@@ -187,7 +188,7 @@ public class SettingsActivity extends AppCompatActivity implements SensorEventLi
     }
     protected void onResume(){
         super.onResume();
-        sensorManager.registerListener(this, light, sensorManager.SENSOR_DELAY_NORMAL);
+        sensorManager.registerListener(this, light, SensorManager.SENSOR_DELAY_NORMAL);
     }
     protected void onPause(){
         super.onPause();
